@@ -50,6 +50,15 @@
 
 <script src="../build/ckeditor.js"></script>
 <script>
+	// Save the data to a fake HTTP server (emulated here with a setTimeout()).
+function saveData( data ) {
+    return new Promise( resolve => {
+        setTimeout( () => {
+            console.log( 'Saved', data );
+            resolve();
+        }, 1000 );
+    } );
+}
 	const editorData = `<h2>Sample</h2>
 		<p>This is an instance of the <a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/overview.html#document-editor">document editor build</a>.</p>
 		<figure class="image">
@@ -57,7 +66,15 @@
 		</figure>
 		<p>You can use this sample to validate whether your <a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/custom-builds.html">custom build</a> works fine.</p>`;
 
-	DecoupledEditor.create( editorData )
+	DecoupledEditor.create( editorData,{
+		autosave: {
+            save( editor ) {
+                // The saveData() function must return a promise
+                // which should be resolved when the data is successfully saved.
+                return saveData( editor.getData() );
+            }
+        }
+	} )
 	.then( editor => {
 		window.editor = editor;
 
