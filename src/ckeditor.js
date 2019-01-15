@@ -33,7 +33,7 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave'
+import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave';
 export default class DecoupledEditor extends DecoupledEditorBase {}
 
 // Plugins to include in the build.
@@ -65,7 +65,7 @@ DecoupledEditor.builtinPlugins = [
 	PasteFromOffice,
 	Table,
 	TableToolbar,
-	Autosave
+	Autosave,
 ];
 
 // Editor configuration.
@@ -95,7 +95,8 @@ DecoupledEditor.defaultConfig = {
 			'mediaEmbed',
 			'|',
 			'undo',
-			'redo'
+			'redo',
+			'colorPicker'
 		]
 	},
 	image: {
@@ -119,6 +120,25 @@ DecoupledEditor.defaultConfig = {
 			'mergeTableCells'
 		]
 	},
+
+	fontSize: {
+		options: [
+		  8,
+		  9,
+		  10,
+		  11,
+		  12,
+		  14,
+		  18,
+		  24,
+		  30,
+		  36,
+		  48,
+		  60,
+		  72,
+		  96
+		]
+	  },
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'
 };
